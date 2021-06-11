@@ -1,8 +1,10 @@
 package br.com.fiap.tds.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.fiap.tds.dao.GenericDao;
 import br.com.fiap.tds.exception.CommitException;
@@ -10,7 +12,7 @@ import br.com.fiap.tds.exception.EntityNotFounfException;
 
 public abstract class GenericDaoImpl<E, K> implements GenericDao<E, K> {
 	
-	private EntityManager em;
+	protected EntityManager em;
 	
 	private Class<E> clazz;
 	
@@ -60,6 +62,22 @@ public abstract class GenericDaoImpl<E, K> implements GenericDao<E, K> {
 			throw new CommitException();
 		}
 		
+	}
+	
+	@Override
+	public List<E> findAll(){
+		TypedQuery<E> query = em.createQuery("from " + clazz.getName(), clazz);
+		//Configurar o máximo de resultado
+		query.setMaxResults(10);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<E> listar(int primeiraPosicao, int maximoResultado) {
+		return em.createQuery("from " + clazz.getName(), clazz)
+				.setFirstResult(primeiraPosicao)
+				.setMaxResults(maximoResultado)
+				.getResultList();
 	}
 
 }
