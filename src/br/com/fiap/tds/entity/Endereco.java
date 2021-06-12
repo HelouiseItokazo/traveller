@@ -41,7 +41,7 @@ public class Endereco {
 	@Column(name="vl_distancia", nullable=false)
 	private Float distancia;
 	
-	@OneToMany(mappedBy = "endereco", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Hotel> hoteis;
 	
 	public void addHotel(Hotel hotel) {

@@ -24,7 +24,7 @@ public class Login {
 	@Column(name="ds_senha", length = 1500, nullable=false)
 	private String senha;
 	
-	@Column(name="ds_email", length = 50, nullable=false)
+	@Column(name="ds_email", length = 50, nullable=false, unique = true)
 	private String email;
 	
 	@Column(name="ds_usuario", length = 25, nullable=false)

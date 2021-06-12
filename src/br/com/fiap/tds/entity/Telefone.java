@@ -36,7 +36,7 @@ public class Telefone {
 	@Column(name="nr_tel_secundario", length = 8)
 	private String telefoneSecundario;
 	
-	@OneToMany(mappedBy = "telefone", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "telefone", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Hotel> hoteis;
 	
 	public void addHotel(Hotel hotel) {

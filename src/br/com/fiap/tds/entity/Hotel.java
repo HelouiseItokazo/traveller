@@ -54,12 +54,11 @@ public class Hotel {
 	@JoinColumn(name = "cd_telefone", nullable = false)
 	private Telefone telefone;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cd_endereco", nullable = false)
 	private Endereco endereco;
 	
-	//TODO VERIFICAR SE PRECISA DE CASCADE 
-	@OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Avaliacao> avaliacoes;
 	
 	public void addAvaliacao(Avaliacao avaliacao) {
